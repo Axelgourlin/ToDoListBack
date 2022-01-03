@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  """Id of the todo"""
+  id: String!
+
+  """Text of the todo"""
+  text: String!
+
+  """Date creation of the Todo ( 22/12/2022)"""
+  createdAt: String!
+
+  """Status of the todo (todo ,done...)"""
+  status: String!
+}
+
+type Query {
+  todos: [Todo!]!
+  todo(id: String!): Todo!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: String!): Todo!
+}
+
+input CreateTodoInput {
+  """Text of the todo"""
+  text: String!
+
+  """Date creation of the Todo ( 22/12/2022)"""
+  createdAt: String!
+
+  """Status of the todo (todo ,done...)"""
+  status: String!
+}
+
+input UpdateTodoInput {
+  """Text of the todo"""
+  text: String
+
+  """Date creation of the Todo ( 22/12/2022)"""
+  createdAt: String
+
+  """Status of the todo (todo ,done...)"""
+  status: String
+  id: String!
+}

@@ -3,25 +3,27 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { TodosModule } from './todos/todos.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: './schema.gql',
       debug: true,
       playground: true,
     }),
     TypeOrmModule.forRoot({
+      keepConnectionAlive: true,
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '903029',
-      database: 'Todo',
-      entities: ['dist/**/*.model.js'],
-      synchronize: false,
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     TodosModule,
   ],
